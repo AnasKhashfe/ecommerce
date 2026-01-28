@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>training</title>
+    <style>
+        .btn-on,
+        .btn-off{
+            
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-on {
+            background-color: rgb(25, 135, 84);
+        }
+
+        .btn-off {
+            background-color: rgb(220, 53, 69);
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+        function ToggleButton() {
+
+            const [isOn, setIsOn] = React.useState('ON');
+
+            function handleClick(){
+                setIsOn(isOn === 'ON' ? 'OFF' : 'ON')
+            }
+            return (
+                <button className = {
+                    isOn === 'ON'
+                        ? 'btn-on'
+                        : 'btn-off'
+
+                }  
+                    onClick = {handleClick}
+                >
+                    {isOn}
+                </button>
+            )
+        }
+
+
+        const container = document.querySelector(".container");
+        ReactDOM.createRoot(container).render(<ToggleButton />)
+    </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatbot</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+      function ChatInput({chatMessages, setChatMessages}){
+        const [inputText, setInputText] = React.useState('');
+        const [isLoading, setIsLoading] = React.useState(false);
+
+        function saveInputText(event){
+          setInputText(event.target.value); 
+        }
+
+
+        async function sendMessage() {
+
+          if(isLoading || inputText === '') return;
+
+          setIsLoading(true);
+
+          setInputText('')
+
+          const newChatMessages = [
+            ...chatMessages,
+            {
+              message: inputText,
+              sender: "user",
+              key: crypto.randomUUID()
+            }
+          ];
+
+          setChatMessages([
+            ...newChatMessages,
+            {
+              message : 'Loading...',
+              sender: 'robot',
+              id: crypto.randomUUID()
+            }
+          ])
+
+          const respnose = await Chatbot.getResponseAsync(inputText);
+          setChatMessages([
+            ...newChatMessages,
+            {
+              message: respnose,
+              sender: "robot",
+              key: crypto.randomUUID()
+            }
+          ]);
+
+          setIsLoading(false);
+
+          
+        }
+
+        function sendMessageByEnter(event){
+          if(event.key === 'Enter'){
+            sendMessage();
+          }else if(event.key === 'Escape'){
+            setInputText('');
+          }
+        }
+
+
+
+        return (
+          <>
+            <input 
+              placeholder = "Send a message to Chatbot" 
+              size = "30"
+              onChange = {saveInputText}
+              onKeyDown = {sendMessageByEnter}
+              value = {inputText} 
+            />
+            <button
+              onClick = {sendMessage}
+            >Send</button>
+          </>
+        );
+      }
+
+
+      function ChatMessage({ message, sender }){ // instead of using props and after that destructuring
+        // const message = props.message;
+        // const sender = props.sender;
+        // const { message, sender } = props;
+      
+      /*  
+        if(sender === "robot"){
+          return (
+            <div>
+              <img src="robot.png" width = "50" />
+              {message}  
+            </div>            
+          );
+        }
+      */      
+        return ( // their is an if statment shortcut instead of above if statement it's best to use :)
+          <div> 
+            {sender === 'robot' && (
+              <img src="../robot.png" width = "50" />
+            )}
+            {message} 
+            { sender === 'user' && (
+              <img src="../user.png" width = "50" />
+            )}  
+          </div>
+        );
+      }
+
+      function ChatMessages({chatMessages}){
+
+      
+       return(
+          <>
+            {chatMessages.map((chatMessage) => {
+              return (
+                <ChatMessage 
+                  message = {chatMessage.message}
+                  sender = {chatMessage.sender}
+                  key = {chatMessage.id}
+                />
+              )
+            })}
+          </>
+        );
+
+
+      }
+
+
+      function App() {
+
+        const [chatMessages, setChatMessages] = React.useState([
+          {
+            message: "Hello",
+            sender: "user",
+            key: "id1"
+          },{
+            message: "Hello! How can I help you?",
+            sender: "robot",
+            key: "id2"
+          },{
+            message: "flip",
+            sender: "user",
+            key: "id3"
+          },{
+            message: "Sure! You got tails",
+            sender: "robot",
+            key: "id4"
+          }
+        ]);
+        
+        // const [chatMessages, setChatMessages] = array ;
+        // const chatMessages = array[0];
+        // const setChatMessages = array[1];
+
+        return (
+          <>
+            <ChatInput 
+              chatMessages = {chatMessages}
+              setChatMessages = {setChatMessages}
+            />
+            <ChatMessages 
+              chatMessages = {chatMessages}
+            />
+          </>
+        )
+      }
+
+    
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>
