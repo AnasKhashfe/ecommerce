@@ -3,19 +3,16 @@ import { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
 import './HomePage.css';
 
-export function HomePage() {
+export function HomePage({ cart }) {
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
+    
     useEffect(() => {
         axios.get('/api/products')
             .then((response) => {
                 setProducts(response.data)
             })
 // we added 'http://localhost:3000 to vite.config.js so when it see /api auto the request will go to localhost:3000'
-        axios.get('/api/cart-items')
-            .then((response) => {
-                setCart(response.data);
-            })
+
     }, [])
 
 

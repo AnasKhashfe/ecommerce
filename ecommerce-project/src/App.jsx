@@ -1,4 +1,6 @@
+import axios from 'axios'
 import { Routes, Route } from 'react-router'
+import { useState,useEffect } from 'react'
 import { HomePage } from './pages/HomePage'
 import { CheckoutPage } from './pages/CheckoutPage'
 import { OrdersPage } from './pages/OrdersPage'
@@ -8,32 +10,41 @@ import './App.css'
 
 
 
+
 function App() {
-  
+
+  const [cart, setCart] = useState([]);
+  useEffect(() => {
+    axios.get('/api/cart-items')
+      .then((response) => {
+        setCart(response.data);
+      });
+
+  })
 
   return (
     <Routes>
-      <Route 
-        index /*path = "/" Do the same thing as index prop but index prop is a shortcut*/ 
-        element = {<HomePage />}
-      />
-      
-      <Route 
-        path = "checkout" 
-        element = {<CheckoutPage />}
+      <Route
+        index /*path = "/" Do the same thing as index prop but index prop is a shortcut*/
+        element={<HomePage cart = { cart } />}
       />
 
-      <Route 
-        path = "Orders" 
-        element = {<OrdersPage />}
+      <Route
+        path="checkout"
+        element={<CheckoutPage cart = { cart } />}
       />
 
-      <Route 
-        path = "Tracking" 
-        element = {<TrackingPage />}
+      <Route
+        path="Orders"
+        element={<OrdersPage />}
       />
-      
-      
+
+      <Route
+        path="Tracking"
+        element={<TrackingPage />}
+      />
+
+
     </Routes>
   )
 }
