@@ -4,8 +4,9 @@ import { useState,useEffect } from 'react'
 import { HomePage } from './pages/home/HomePage'
 import { CheckoutPage } from './pages/checkout/CheckoutPage'
 import { OrdersPage } from './pages/orders/OrdersPage'
-import { TrackingPage } from './pages/TrackingPage'
+import { TrackingPage } from './pages/tracking/TrackingPage'
 import './App.css'
+import { NotFoundPage } from './pages/NotFoundPage'
 
 
 
@@ -44,8 +45,13 @@ function App() {
       />
 
       <Route
-        path="Tracking"
-        element={<TrackingPage />}
+        path="tracking/:orderId/:productId"
+        element={<TrackingPage cart = { cart }/>}
+      />
+
+      <Route
+        path="*"
+        element={<NotFoundPage cart={cart}/>}
       />
 
 
