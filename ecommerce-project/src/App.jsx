@@ -8,7 +8,7 @@ import { TrackingPage } from './pages/tracking/TrackingPage'
 import './App.css'
 import { NotFoundPage } from './pages/NotFoundPage'
 
-
+window.axios = axios;
 
 
 
@@ -41,7 +41,7 @@ function App() {
 
       <Route
         path="Orders"
-        element={<OrdersPage cart={cart} />}
+        element={<OrdersPage cart={cart} loadCart={loadCart} />}
       />
 
       <Route
