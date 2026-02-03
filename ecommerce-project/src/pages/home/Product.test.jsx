@@ -11,7 +11,7 @@ let product ;
 
 let loadCart ; // vi.fn() = creates a fake function that doesn't do anything
 
-
+let user ;
 beforeEach(() => {
     product = {
         id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -25,6 +25,8 @@ beforeEach(() => {
         keywords: ["socks", "sports", "apparel"]
     };
 
+    user = userEvent.setup();
+    
     loadCart = vi.fn();
 });
 
@@ -64,7 +66,7 @@ describe('Product component', () => {
 
         render(<Product product={product} loadCart={loadCart} />);
 
-        const user = userEvent.setup();
+        
         const addToCartButton = screen.getByTestId('add-to-cart-button')
         await user.click(addToCartButton); // this simulate a click event and it takes time to click the button so this is asynchronous code (it returns a Promise)
 
@@ -80,6 +82,32 @@ describe('Product component', () => {
         expect(loadCart).toHaveBeenCalled();
 
     });
+
+    it('Test select a quantity', async () => {
+        render(<Product product={product} loadCart={loadCart} />);
+
+        const quantitySelector = screen.getByTestId('product-quantity-selector');
+        expect(quantitySelector).toHaveValue('1');
+
+        
+        await user.selectOptions(quantitySelector, '3');
+
+        expect(quantitySelector).toHaveValue('3');
+
+        const addToCartButton = screen.getByTestId('add-to-cart-button');
+        await user.click(addToCartButton);
+
+        expect(axios.post).toHaveBeenCalledWith(
+            '/api/cart-items',
+            {
+                productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+                quantity: 3
+            }
+        );
+        expect(loadCart).toHaveBeenCalled();
+
+
+    })
 });
 
 // Mock = create a fake version of this function
