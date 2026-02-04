@@ -1,0 +1,35 @@
+[33mba0b3d0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Create Header vitest
+[33m319a32b[m Create PaymentSummary testing file and modify the other files
+[33m5675424[m Create integration test for HomePage
+[33m1fef9c5[m Use beforeEach to remove duplication
+[33md0f1377[m Test clicking add to cart button
+[33m0fe437e[m Create integration test for Product component
+[33m63b6998[m Create unit tests for formatMoney
+[33mdbbd279[m Solve all the examples
+[33m8e199ca[m Make create order button work
+[33m01cf14d[m Create delete cart item feature
+[33mdf753f5[m Create update delivery option feature
+[33m303d602[m Create add to cart feature
+[33me9f05b1[m Generate the HTML of tracking page and Update some code in all files
+[33mcb5a34c[m Convert home , orders and checkout to async await
+[33m9a0a8d2[m Spereate into smaller components
+[33mebb12f8[m Generater the HTML for the orders page
+[33mb09f503[m Generate HTML for the payment summary
+[33maee2bf2[m Generate the HTML for the deliveryOptions
+[33m834cf31[m Generate HTML for the cart items
+[33mba2b9fe[m Lift cart up and shart it between pages
+[33m2ecf4db[m Add server proxy config for /api and /images
+[33m89c75f6[m Get cart from the backend and display quantity
+[33m01cd0e0[m Use data from the backend to generate the HTML
+[33mb024921[m Use axios to fetch the data
+[33md372359[m Fetch data from the backend
+[33mdcbbfd4[m Add ecommerce backend
+[33m1981138[m Generate the HTML for the home page
+[33m11647aa[m Split header into component and use Link
+[33me1f50c5[m Mover oreders page and tracking page to React
+[33m27e0e78[m Update links to match the router
+[33m284e779[m Move checkout page into React
+[33m30d9926[m Create multiple pages using react-router
+[33md7408d0[m Move the home page into React
+[33m9b306b1[m Add the starting HTML and CSS code
+[33m51ac24a[m Add the starting files
