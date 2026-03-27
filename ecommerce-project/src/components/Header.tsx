@@ -47,7 +47,7 @@ export function Header({ cart }: HeaderProps) // This tells TypeScript that cart
                 <Link to="/" className="header-link">
                     <img className="logo"
                         data-testid='header-logo'
-                        src="images/logo-white.png" />
+                        src="images/mobile-logo-white.png" />
                     <img className="mobile-logo"
                         data-testid='header-mobile-logo'
                         src="images/mobile-logo-white.png" />

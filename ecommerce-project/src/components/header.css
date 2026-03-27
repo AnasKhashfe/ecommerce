@@ -1,13 +1,10 @@
 .header {
   background-color: rgb(8, 79, 45);
   color: white;
-  padding-left: 15px;
-  padding-right: 15px;
-
+  padding: 0 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   position: fixed;
   top: 0;
   left: 0;
@@ -62,8 +59,7 @@
 .header .middle-section {
   flex: 1;
   max-width: 850px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 0 10px;
   display: flex;
 }
 
